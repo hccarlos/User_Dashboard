@@ -1,0 +1,84 @@
+<html>
+  <head>
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+	<title></title>
+  </head>
+  <body>
+  	<nav class="navbar navbar-default navbar-static-top">
+  		<div class="container">
+  			<p class="navbar-text navbar-left"><a href="#" class="navbar-link">Dashboard</a></p>
+        <p class="navbar-text navbar-left"><a href="#" class="navbar-link">Profile</a></p>
+  			<p class="navbar-text navbar-right">Signed in as {{session['first_name']}}<a href="#" class="navbar-link">Log Off</a></p>
+  		</div>
+    </nav>
+
+    <div class="container">
+
+      <div class="row">
+        <div class="col-sm-6 col-md-4">
+
+          <h3>Edit Information</h3>
+            <form action="#" method="POST">
+              <p>
+                <div class="input-group">
+                  <span class="input-group-addon" id="basic-addon1">Email</span>
+                  <input type="text" name="email" class="form-control" placeholder="{{session['email']}}" aria-describedby="basic-addon1">
+                </div>
+              </p>
+              <p>
+                <div class="input-group">
+                  <span class="input-group-addon" id="basic-addon1">First Name</span>
+                  <input type="text" name="first_name" class="form-control" placeholder="{{session['first_name']}}" aria-describedby="basic-addon1">
+                </div>
+              </p>
+              <p>
+                <div class="input-group">
+                  <span class="input-group-addon" id="basic-addon1">Last Name</span>
+                  <input type="text" name="last_name" class="form-control" placeholder="{{session['last_name']}}" aria-describedby="basic-addon1">
+                </div>
+              </p>
+              <p><input type="submit" class="btn btn-primary" value="Save"></p>
+            </form>
+        </div>
+
+        <div class="col-sm-6 col-md-4">
+          <h3>Change Password</h3>
+            <form action="#" method="POST">
+              <p>
+                <div class="input-group">
+                  <span class="input-group-addon" id="basic-addon1">Password:</span>
+                  <input type="text" name="pwd" class="form-control" aria-describedby="basic-addon1">
+                </div>
+              </p>
+              <p>
+                <div class="input-group">
+                  <span class="input-group-addon" id="basic-addon1">Password Confirmation:</span>
+                  <input type="text" name="pwd2" class="form-control" aria-describedby="basic-addon1">
+                </div>
+              </p>
+              <p><input type="submit" class="btn btn-primary" value="Update Password"></p>
+            </form>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <form action="#" method="POST">
+          <div class="form-group">
+            <label for="comment">Edit Description</label>
+            <textarea class="form-control" rows="5" id="comment" name="description"></textarea>
+          </div>
+          <p><input type="submit" class="btn btn-primary" value="Save"></p>
+        </form>
+      </div>
+
+    </div>
+  </body>
+</html>

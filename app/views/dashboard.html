@@ -1,0 +1,59 @@
+<html>
+  <head>
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+	<title></title>
+  </head>
+  <body>
+  	<nav class="navbar navbar-default navbar-static-top">
+  		<div class="container">
+  			<p class="navbar-text navbar-left"><a href="#" class="navbar-link">Dashboard</a></p>
+        <p class="navbar-text navbar-left"><a href="#" class="navbar-link">Profile</a></p>
+  			<p class="navbar-text navbar-right">Signed in as {{session['first_name']}}<a href="#" class="navbar-link">Log Off</a></p>
+  		</div>
+	 </nav>
+   <div class="container">
+    {% if session['user_level'] == "admin" %}
+    <h3>Manage Users</h3>
+    <a href="#"></a><button type="button" class="btn btn-default">Add New</button>
+    {% else %}
+    <h3>Manage Users</h3>
+    {% endif %}
+    <div class="panel panel-default">
+      <div class="panel-heading">User List</div>
+      <table class="table">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>email</th>
+          <th>created_at</th>
+          <th>user_level</th>
+          {% if session['user_level'] == "admin" %}
+          <th>actions</th>
+          <th></th>
+          {% endif %}
+        </tr>
+        {% for user in all_users%}
+        <tr>
+          <td>user['id']</td>
+          <td>user['name']</td>
+          <td>user['email']</td>
+          <td>user['created_at']</td>
+          <td>user['user_level']</td>
+          {% if session['user_level'] == "admin" %}
+          <td><a href="#">edit</a></td>
+          <td><a href="#">remove</a></td>
+          {% endif %}
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+   </div>
+  </body>
+</html>

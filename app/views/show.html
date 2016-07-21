@@ -1,0 +1,64 @@
+<html>
+  <head>
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+	<title></title>
+  </head>
+  <body>
+  	<nav class="navbar navbar-default navbar-static-top">
+  		<div class="container">
+  			<p class="navbar-text navbar-left"><a href="#" class="navbar-link">Dashboard</a></p>
+        <p class="navbar-text navbar-left"><a href="#" class="navbar-link">Profile</a></p>
+  			<p class="navbar-text navbar-right">Signed in as {{session['first_name']}}<a href="#" class="navbar-link">Log Off</a></p>
+  		</div>
+	</nav>
+  <div class="container">
+    <h3>{{user['first_name']}} {{user['last_name']}}</h3>
+    <p>Registered at: {{user['created_at']}}</p>
+    <p>User ID: {{user['id']}}</p>
+    <p>Email address: {{user['email']}}</p>
+    <p>Description: {{user['description']}}</p>
+
+    <h3>Join the Discussion! Post a Message:</h3>
+    <form action="/wall/post_message" method="post">
+      <textarea cols="100" rows="3" name="message"></textarea>
+      <input type="submit" name="post_message_button" value="Post Message">
+    </form>
+    <hr>
+
+    {% for messages in all_usermessages %}
+      <p>Author: {{messages['first_name']}} {{messages['last_name']}} Posted on: {{messages['created_at'].strftime("%B %d, %Y %H:%M:%S")}}</p>
+      <p>{{messages['message']}}</p>
+      <form action="/wall/{{messages['messageID']}}/delete">
+      <input type="submit" name="delete_message" value="Delete Message">
+      </form>
+
+      {% for comment in all_usercomments %}
+        {% if comment['messages_id'] == messages['messageID'] %}
+          <p>{{comment['first_name']}} {{comment['last_name']}}
+          Commented on ({{comment['created_at'].strftime("%B %d, %Y %H:%M:%S")}})</p>
+          <p>{{comment['comment']}}</p>
+          <form action="/wall/{{comment['commentID']}}/delete">
+            <input type="submit" name="delete_message" value="Delete Message">
+          </form>
+        {% endif %}
+      {% endfor %}
+
+      <form action="/wall/{{messages['messageID']}}/post_comment" method="post">
+      <textarea cols ="30" rows="3" name="comment">Post your comments. </textarea>
+      <input type="submit" name="comments_button" value="Post Comment">
+      </form>
+
+      <hr>
+    {% endfor %}
+
+
+  </div>
+  </body>
+</html>
